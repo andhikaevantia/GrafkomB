@@ -5,17 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="18405fc3-0354-4578-95a2-6115ed376a25" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/shaders/scene.frag" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/shaders/scene.vert" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Engine/Object2d.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Engine/ShaderProgram.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Engine/UniformsMap.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Engine/Utils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Engine/Window.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/shaders/sceneWithVerticesColor.frag" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/shaders/sceneWithVerticesColor.vert" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Engine/Rectangle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Engine/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/shaders/scene.frag" beforeDir="false" afterPath="$PROJECT_DIR$/resources/shaders/scene.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Engine/Object2d.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Engine/Object2d.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,8 +21,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="shader-template" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -54,10 +50,14 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "D:/Grafkom/B/Grafkom2223/resources/shaders",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Grafkom\B\Grafkom2223\resources\shaders" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
     </key>
