@@ -1,6 +1,6 @@
-import Engine.Object2d;
-import Engine.Rectangle;
+import Engine.Object;
 import Engine.ShaderProgram;
+import Engine.Sphere;
 import Engine.Window;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
@@ -19,12 +19,12 @@ public class Main {
     private Window window =
         new Window(600,600,
                 "Hello World");
-    ArrayList<Object2d> objects
+    ArrayList<Object> objects
             = new ArrayList<>();
-    ArrayList<Object2d> objectsRectangle
+    ArrayList<Object> objectsRectangle
             = new ArrayList<>();
 
-    ArrayList<Object2d> objectsPointsControl = new ArrayList<>();
+    ArrayList<Object> objectsPointsControl = new ArrayList<>();
     public void init(){
         window.init();
         GL.createCapabilities();
@@ -48,31 +48,63 @@ public class Main {
 //            ),
 //            new Vector4f(0.0f,1.0f,1.0f,1.0f)
 //        ));
-        objects.add(new Object2d(
-            Arrays.asList(
-                new ShaderProgram.ShaderModuleData(
-                        "resources/shaders/sceneWithVerticesColor.vert"
-                        , GL_VERTEX_SHADER),
-                new ShaderProgram.ShaderModuleData(
-                        "resources/shaders/sceneWithVerticesColor.frag"
-                        , GL_FRAGMENT_SHADER)
-            ),
-            new ArrayList<>(
-                List.of(
-                        new Vector3f(0.0f,0.5f,0.0f),
-                        new Vector3f(-0.5f,-0.5f,0.0f),
-                        new Vector3f(0.5f,-0.5f,0.0f)
-                )
-            ),
-            new ArrayList<>(
-                List.of(
-                    new Vector3f(1.0f,0.0f,0.0f),
-                    new Vector3f(0.0f,1.0f,0.0f),
-                    new Vector3f(0.0f,0.0f,1.0f)
-                )
-            )
-        ));
-        objectsRectangle.add(new Rectangle(
+//        objects.add(new Object2d(
+//            Arrays.asList(
+//                new ShaderProgram.ShaderModuleData(
+//                        "resources/shaders/sceneWithVerticesColor.vert"
+//                        , GL_VERTEX_SHADER),
+//                new ShaderProgram.ShaderModuleData(
+//                        "resources/shaders/sceneWithVerticesColor.frag"
+//                        , GL_FRAGMENT_SHADER)
+//            ),
+//            new ArrayList<>(
+//                List.of(
+//                        new Vector3f(0.0f,0.5f,0.0f),
+//                        new Vector3f(-0.5f,-0.5f,0.0f),
+//                        new Vector3f(0.5f,-0.5f,0.0f)
+//                )
+//            ),
+//            new ArrayList<>(
+//                List.of(
+//                    new Vector3f(1.0f,0.0f,0.0f),
+//                    new Vector3f(0.0f,1.0f,0.0f),
+//                    new Vector3f(0.0f,0.0f,1.0f)
+//                )
+//            )
+//        ));
+//        objectsRectangle.add(new Rectangle(
+//            Arrays.asList(
+//                new ShaderProgram.ShaderModuleData(
+//                        "resources/shaders/scene.vert"
+//                        , GL_VERTEX_SHADER),
+//                new ShaderProgram.ShaderModuleData(
+//                        "resources/shaders/scene.frag"
+//                        , GL_FRAGMENT_SHADER)
+//            ),
+//            new ArrayList<>(
+//                List.of(
+//                    new Vector3f(0.0f,0.0f,0.0f),
+//                    new Vector3f(0.5f,0.0f,0.0f),
+//                    new Vector3f(0.0f,0.5f,0.0f),
+//                    new Vector3f( 0.5f,0.5f,0.0f)
+//                )
+//            ),
+//            new Vector4f(0.0f,1.0f,1.0f,1.0f),
+//            Arrays.asList(0,1,2,1,2,3)
+//        ));
+//        objectsPointsControl.add(new Object2d(
+//            Arrays.asList(
+//                new ShaderProgram.ShaderModuleData(
+//                        "resources/shaders/scene.vert"
+//                        , GL_VERTEX_SHADER),
+//                new ShaderProgram.ShaderModuleData(
+//                        "resources/shaders/scene.frag"
+//                        , GL_FRAGMENT_SHADER)
+//            ),
+//            new ArrayList<>(),
+//            new Vector4f(0.0f,1.0f,1.0f,1.0f)
+//        ));
+        objects.add(new Sphere(
             Arrays.asList(
                 new ShaderProgram.ShaderModuleData(
                         "resources/shaders/scene.vert"
@@ -83,26 +115,17 @@ public class Main {
             ),
             new ArrayList<>(
                 List.of(
-                    new Vector3f(0.0f,0.0f,0.0f),
-                    new Vector3f(0.5f,0.0f,0.0f),
-                    new Vector3f(0.0f,0.5f,0.0f),
-                    new Vector3f( 0.5f,0.5f,0.0f)
+                    new Vector3f(-0.5f,0.5f,0.0f),
+                    new Vector3f(-0.5f,-0.5f,0.0f),
+                    new Vector3f(0.5f,-0.5f,0.0f),
+                    new Vector3f(0.5f,0.5f,0.0f)
                 )
             ),
             new Vector4f(0.0f,1.0f,1.0f,1.0f),
-            Arrays.asList(0,1,2,1,2,3)
-        ));
-        objectsPointsControl.add(new Object2d(
-            Arrays.asList(
-                new ShaderProgram.ShaderModuleData(
-                        "resources/shaders/scene.vert"
-                        , GL_VERTEX_SHADER),
-                new ShaderProgram.ShaderModuleData(
-                        "resources/shaders/scene.frag"
-                        , GL_FRAGMENT_SHADER)
-            ),
-            new ArrayList<>(),
-            new Vector4f(0.0f,1.0f,1.0f,1.0f)
+                Arrays.asList(0.0f,0.0f,0.0f),
+                0.5f,
+                0.5f,
+                0.5f
         ));
     }
     public void input(){
@@ -117,7 +140,7 @@ public class Main {
             //System.out.println("x : "+pos.x+" y : "+pos.y);
             if((!(pos.x > 1 || pos.x < -0.97) && !(pos.y > 0.97 || pos.y < -1))){
                 System.out.println("x : "+pos.x+" y : "+pos.y);
-                objectsPointsControl.get(0).addVertices(new Vector3f(pos.x,pos.y,0));
+                //objectsPointsControl.get(0).addVertices(new Vector3f(pos.x,pos.y,0));
             }
 
         }
@@ -133,15 +156,15 @@ public class Main {
             input();
             //code
             //..
-            for(Object2d object:objects){
-                object.drawWithVerticesColor();
-            }
-            for(Object2d object:objectsRectangle){
+            for(Object object:objects){
                 object.draw();
             }
-            for(Object2d object:objectsPointsControl){
-                object.drawLine();
-            }
+//            for(Object2d object:objectsRectangle){
+//                object.draw();
+//            }
+//            for(Object2d object:objectsPointsControl){
+//                object.drawLine();
+//            }
             // Restore state
             glDisableVertexAttribArray(0);
             // Poll for window events.
