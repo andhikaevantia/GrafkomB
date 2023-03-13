@@ -17,7 +17,7 @@ public class Sphere extends Circle{
     public Sphere(List<ShaderModuleData> shaderModuleDataList, List<Vector3f> vertices, Vector4f color, List<Float> centerPoint, Float radiusX, Float radiusY, Float radiusZ) {
         super(shaderModuleDataList, vertices, color, centerPoint, radiusX, radiusY);
         this.radiusZ = radiusZ;
-        createSphere();
+        createBox();
         setupVAOVBO();
     }
     public void createBox(){
@@ -173,12 +173,12 @@ public class Sphere extends Circle{
                 Utils.listoInt(index), GL_STATIC_DRAW);
 
     }
-    public void draw(){
-        drawSetup();
-        //Bind IBO & draw
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-        glDrawElements(GL_TRIANGLES,
-                index.size(),
-                GL_UNSIGNED_INT, 0);
-    }
+//    public void draw(){
+//        drawSetup();
+//        //Bind IBO & draw
+//        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+//        glDrawElements(GL_TRIANGLES,
+//                index.size(),
+//                GL_UNSIGNED_INT, 0);
+//    }
 }

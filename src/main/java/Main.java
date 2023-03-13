@@ -123,14 +123,16 @@ public class Main {
             ),
             new Vector4f(0.0f,1.0f,1.0f,1.0f),
                 Arrays.asList(0.0f,0.0f,0.0f),
-                0.5f,
-                0.5f,
-                0.5f
+                0.125f,
+                0.125f,
+                0.125f
         ));
+//        objects.get(0).translateObject(0.5f,0.0f,0.0f);
+        objects.get(0).scaleObject(2.0f,2.0f,2.0f);
     }
     public void input(){
         if (window.isKeyPressed(GLFW_KEY_W)) {
-            System.out.println("W");
+            objects.get(0).rotateObject((float) Math.toRadians(0.5f),0.0f,0.0f,1.0f);
         }
         if(window.getMouseInput().isLeftButtonPressed()){
             Vector2f pos = window.getMouseInput().getCurrentPos();

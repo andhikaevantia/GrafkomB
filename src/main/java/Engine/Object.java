@@ -1,5 +1,6 @@
 package Engine;
 
+import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 
@@ -22,6 +23,8 @@ public class Object extends ShaderProgram{
     List<Vector3f> verticesColor;
     int vboColor;
 
+    Matrix4f model;
+
     public Object(List<ShaderModuleData> shaderModuleDataList,
                   List<Vector3f> vertices,
                   Vector4f color) {
@@ -32,6 +35,9 @@ public class Object extends ShaderProgram{
         uniformsMap = new UniformsMap(getProgramId());
         uniformsMap.createUniform(
                 "uni_color");
+        uniformsMap.createUniform(
+                "model");
+        model = new Matrix4f();
 
     }
     public Object(List<ShaderModuleData> shaderModuleDataList,
@@ -77,6 +83,8 @@ public class Object extends ShaderProgram{
         bind();
         uniformsMap.setUniform(
                 "uni_color", color);
+        uniformsMap.setUniform(
+                "model", model);
         // Bind VBO
         glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -141,5 +149,14 @@ public class Object extends ShaderProgram{
     public void addVertices(Vector3f newVector){
         vertices.add(newVector);
         setupVAOVBO();
+    }
+    public void translateObject(Float offsetX,Float offsetY,Float offsetZ){
+        model = new Matrix4f().translate(offsetX,offsetY,offsetZ).mul(new Matrix4f(model));
+    }
+    public void rotateObject(Float degree, Float offsetX,Float offsetY,Float offsetZ){
+        model = new Matrix4f().rotate(degree,offsetX,offsetY,offsetZ).mul(new Matrix4f(model));
+    }
+    public void scaleObject(Float x,Float y,Float z){
+        model = new Matrix4f().scale(x,y,z).mul(new Matrix4f(model));
     }
 }
