@@ -129,10 +129,99 @@ public class Main {
         ));
 //        objects.get(0).translateObject(0.5f,0.0f,0.0f);
         objects.get(0).scaleObject(2.0f,2.0f,2.0f);
+
+        objects.get(0).getChildObject().add(new Sphere(
+                Arrays.asList(
+                        new ShaderProgram.ShaderModuleData(
+                                "resources/shaders/scene.vert"
+                                , GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData(
+                                "resources/shaders/scene.frag"
+                                , GL_FRAGMENT_SHADER)
+                ),
+                new ArrayList<>(
+                        List.of(
+                                new Vector3f(-0.5f,0.5f,0.0f),
+                                new Vector3f(-0.5f,-0.5f,0.0f),
+                                new Vector3f(0.5f,-0.5f,0.0f),
+                                new Vector3f(0.5f,0.5f,0.0f)
+                        )
+                ),
+                new Vector4f(0.0f,1.0f,1.0f,1.0f),
+                Arrays.asList(0.0f,0.0f,0.0f),
+                0.125f,
+                0.125f,
+                0.125f
+        ));
+        objects.get(0).getChildObject().get(0).translateObject(0.25f,0.0f,0.0f);
+
+        objects.get(0).getChildObject().add(new Sphere(
+                Arrays.asList(
+                        new ShaderProgram.ShaderModuleData(
+                                "resources/shaders/scene.vert"
+                                , GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData(
+                                "resources/shaders/scene.frag"
+                                , GL_FRAGMENT_SHADER)
+                ),
+                new ArrayList<>(
+                        List.of(
+                                new Vector3f(-0.5f,0.5f,0.0f),
+                                new Vector3f(-0.5f,-0.5f,0.0f),
+                                new Vector3f(0.5f,-0.5f,0.0f),
+                                new Vector3f(0.5f,0.5f,0.0f)
+                        )
+                ),
+                new Vector4f(0.0f,1.0f,1.0f,1.0f),
+                Arrays.asList(0.0f,0.0f,0.0f),
+                0.125f,
+                0.125f,
+                0.125f
+        ));
+        objects.get(0).getChildObject().get(1).translateObject(0.5f,0.0f,0.0f);
+
+        objects.get(0).getChildObject().get(1).getChildObject().add(new Sphere(
+                Arrays.asList(
+                        new ShaderProgram.ShaderModuleData(
+                                "resources/shaders/scene.vert"
+                                , GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData(
+                                "resources/shaders/scene.frag"
+                                , GL_FRAGMENT_SHADER)
+                ),
+                new ArrayList<>(
+                        List.of(
+                                new Vector3f(-0.5f,0.5f,0.0f),
+                                new Vector3f(-0.5f,-0.5f,0.0f),
+                                new Vector3f(0.5f,-0.5f,0.0f),
+                                new Vector3f(0.5f,0.5f,0.0f)
+                        )
+                ),
+                new Vector4f(0.0f,1.0f,1.0f,1.0f),
+                Arrays.asList(0.0f,0.0f,0.0f),
+                0.125f,
+                0.125f,
+                0.125f
+        ));
+        objects.get(0).getChildObject().get(1).getChildObject().get(0).scaleObject(0.5f,0.5f,0.0f);
+        objects.get(0).getChildObject().get(1).getChildObject().get(0).translateObject(0.5f,-0.1f,0.0f);
     }
     public void input(){
         if (window.isKeyPressed(GLFW_KEY_W)) {
             objects.get(0).rotateObject((float) Math.toRadians(0.5f),0.0f,0.0f,1.0f);
+
+            for(Object child: objects.get(0).getChildObject()){
+                Vector3f tempCenterPoint = child.updateCenterPoint();
+                child.translateObject(tempCenterPoint.x*-1,tempCenterPoint.y*-1,tempCenterPoint.z*-1);
+                child.rotateObject((float) Math.toRadians(0.5f),0.0f,0.0f,1.0f);
+                child.translateObject(tempCenterPoint.x*1,tempCenterPoint.y*1,tempCenterPoint.z*1);
+            }
+            for(Object child: objects.get(0).getChildObject().get(1).getChildObject()){
+                Vector3f tempCenterPoint = objects.get(0).getChildObject().get(1).updateCenterPoint();
+                child.translateObject(tempCenterPoint.x*-1,tempCenterPoint.y*-1,tempCenterPoint.z*-1);
+                child.rotateObject((float) Math.toRadians(0.7f),0.0f,0.0f,1.0f);
+                child.translateObject(tempCenterPoint.x*1,tempCenterPoint.y*1,tempCenterPoint.z*1);
+            }
         }
         if(window.getMouseInput().isLeftButtonPressed()){
             Vector2f pos = window.getMouseInput().getCurrentPos();

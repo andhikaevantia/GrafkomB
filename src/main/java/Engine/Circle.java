@@ -62,8 +62,8 @@ public class Circle extends Object {
             }
         }
     }
-    public void draw(){
-        drawSetup();
-        glDrawArrays(GL_TRIANGLE_FAN, 0, vertices.size());
-    }
+//    public void draw(){
+//        drawSetup();
+//        glDrawArrays(GL_TRIANGLE_FAN, 0, vertices.size());
+//    }
 }
