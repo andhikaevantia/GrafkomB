@@ -24,7 +24,7 @@ public class Rectangle extends Object {
 
     }
     public void draw(){
-        drawSetup();
+//        drawSetup();
         //Bind IBO & draw
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
         glDrawElements(GL_TRIANGLES,

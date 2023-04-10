@@ -1,7 +1,5 @@
+import Engine.*;
 import Engine.Object;
-import Engine.ShaderProgram;
-import Engine.Sphere;
-import Engine.Window;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
@@ -25,10 +23,14 @@ public class Main {
             = new ArrayList<>();
 
     ArrayList<Object> objectsPointsControl = new ArrayList<>();
+
+    Camera camera = new Camera();
+    Projection projection = new Projection(window.getWidth(),window.getHeight());
     public void init(){
         window.init();
         GL.createCapabilities();
-
+        camera.setPosition(0,0,0.5f);
+        camera.setRotation((float)Math.toRadians(0.0f),(float)Math.toRadians(30.0f));
         //code
 //        objects.add(new Object2d(
 //            Arrays.asList(
@@ -248,7 +250,7 @@ public class Main {
             //code
             //..
             for(Object object:objects){
-                object.draw();
+                object.draw(camera,projection);
             }
 //            for(Object2d object:objectsRectangle){
 //                object.draw();

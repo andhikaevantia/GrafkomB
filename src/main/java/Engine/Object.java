@@ -53,6 +53,10 @@ public class Object extends ShaderProgram{
                 "uni_color");
         uniformsMap.createUniform(
                 "model");
+        uniformsMap.createUniform(
+                "view");
+        uniformsMap.createUniform(
+                "projection");
         model = new Matrix4f();
         childObject = new ArrayList<>();
     }
@@ -95,12 +99,16 @@ public class Object extends ShaderProgram{
                 Utils.listoFloat(verticesColor),
                 GL_STATIC_DRAW);
     }
-    public void drawSetup(){
+    public void drawSetup(Camera camera, Projection projection){
         bind();
         uniformsMap.setUniform(
                 "uni_color", color);
         uniformsMap.setUniform(
                 "model", model);
+        uniformsMap.setUniform(
+                "view", camera.getViewMatrix());
+        uniformsMap.setUniform(
+                "projection", projection.getProjMatrix());
         // Bind VBO
         glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -126,8 +134,8 @@ public class Object extends ShaderProgram{
                 false,
                 0, 0);
     }
-    public void draw(){
-        drawSetup();
+    public void draw(Camera camera,Projection projection){
+        drawSetup(camera,projection);
         // Draw the vertices
         glLineWidth(10);
         glPointSize(10);
@@ -140,7 +148,7 @@ public class Object extends ShaderProgram{
         glDrawArrays(GL_TRIANGLES, 0,
                 vertices.size());
         for(Object child:childObject){
-            child.draw();
+            child.draw(camera,projection);
         }
     }
     public void drawWithVerticesColor(){
@@ -158,7 +166,7 @@ public class Object extends ShaderProgram{
                 vertices.size());
     }
     public void drawLine(){
-        drawSetup();
+//        drawSetup();
         // Draw the vertices
         glLineWidth(1);
         glPointSize(1);
