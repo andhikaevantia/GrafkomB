@@ -3,17 +3,24 @@ package Engine;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL15.GL_STATIC_DRAW;
+import static org.lwjgl.opengl.GL20.glEnableVertexAttribArray;
+import static org.lwjgl.opengl.GL20.glVertexAttribPointer;
 
 public class Sphere extends Circle{
     Float radiusZ;
 
     List<Integer> index;
     int ibo;
+
+    List<Vector3f> normal;
+    int nbo;
     public Sphere(List<ShaderModuleData> shaderModuleDataList, List<Vector3f> vertices, Vector4f color, List<Float> centerPoint, Float radiusX, Float radiusY, Float radiusZ) {
         super(shaderModuleDataList, vertices, color, centerPoint, radiusX, radiusY);
         this.radiusZ = radiusZ;
@@ -105,22 +112,67 @@ public class Sphere extends Circle{
         vertices.add(tempVertices.get(2));
         vertices.add(tempVertices.get(3));
         vertices.add(tempVertices.get(7));
-        //kotak atas
-        vertices.add(tempVertices.get(0));
-        vertices.add(tempVertices.get(4));
-        vertices.add(tempVertices.get(7));
-
-        vertices.add(tempVertices.get(4));
-        vertices.add(tempVertices.get(7));
-        vertices.add(tempVertices.get(3));
         //kotak bawah
         vertices.add(tempVertices.get(1));
         vertices.add(tempVertices.get(5));
         vertices.add(tempVertices.get(6));
 
-        vertices.add(tempVertices.get(5));
         vertices.add(tempVertices.get(6));
         vertices.add(tempVertices.get(2));
+        vertices.add(tempVertices.get(1));
+        //kotak atas
+        vertices.add(tempVertices.get(0));
+        vertices.add(tempVertices.get(4));
+        vertices.add(tempVertices.get(7));
+
+        vertices.add(tempVertices.get(7));
+        vertices.add(tempVertices.get(0));
+        vertices.add(tempVertices.get(3));
+
+        normal = new ArrayList<>(Arrays.asList(
+                //belakang
+                new Vector3f(0.0f,0.0f,-1.0f),
+                new Vector3f(0.0f,0.0f,-1.0f),
+                new Vector3f(0.0f,0.0f,-1.0f),
+                new Vector3f(0.0f,0.0f,-1.0f),
+                new Vector3f(0.0f,0.0f,-1.0f),
+                new Vector3f(0.0f,0.0f,-1.0f),
+                //depan
+                new Vector3f(0.0f,0.0f,1.0f),
+                new Vector3f(0.0f,0.0f,1.0f),
+                new Vector3f(0.0f,0.0f,1.0f),
+                new Vector3f(0.0f,0.0f,1.0f),
+                new Vector3f(0.0f,0.0f,1.0f),
+                new Vector3f(0.0f,0.0f,1.0f),
+                //kiri
+                new Vector3f(-1.0f,0.0f,0.0f),
+                new Vector3f(-1.0f,0.0f,0.0f),
+                new Vector3f(-1.0f,0.0f,0.0f),
+                new Vector3f(-1.0f,0.0f,0.0f),
+                new Vector3f(-1.0f,0.0f,0.0f),
+                new Vector3f(-1.0f,0.0f,0.0f),
+                //kanan
+                new Vector3f(1.0f,0.0f,0.0f),
+                new Vector3f(1.0f,0.0f,0.0f),
+                new Vector3f(1.0f,0.0f,0.0f),
+                new Vector3f(1.0f,0.0f,0.0f),
+                new Vector3f(1.0f,0.0f,0.0f),
+                new Vector3f(1.0f,0.0f,0.0f),
+                //bawah
+                new Vector3f(0.0f,-1.0f,0.0f),
+                new Vector3f(0.0f,-1.0f,0.0f),
+                new Vector3f(0.0f,-1.0f,0.0f),
+                new Vector3f(0.0f,-1.0f,0.0f),
+                new Vector3f(0.0f,-1.0f,0.0f),
+                new Vector3f(0.0f,-1.0f,0.0f),
+                //atas
+                new Vector3f(0.0f,1.0f,0.0f),
+                new Vector3f(0.0f,1.0f,0.0f),
+                new Vector3f(0.0f,1.0f,0.0f),
+                new Vector3f(0.0f,1.0f,0.0f),
+                new Vector3f(0.0f,1.0f,0.0f),
+                new Vector3f(0.0f,1.0f,0.0f)
+        ));
     }
     public void createSphere(){
         vertices.clear();
@@ -172,6 +224,34 @@ public class Sphere extends Circle{
         glBufferData(GL_ELEMENT_ARRAY_BUFFER,
                 Utils.listoInt(index), GL_STATIC_DRAW);
 
+    }
+    public void setupVAOVBO(){
+        super.setupVAOVBO();
+
+        //nbo
+        nbo = glGenBuffers();
+        glBindBuffer(GL_ARRAY_BUFFER, nbo);
+        glBufferData(GL_ARRAY_BUFFER,
+                Utils.listoFloat(normal),
+                GL_STATIC_DRAW);
+        uniformsMap.createUniform("lightColor");
+        uniformsMap.createUniform("lightPos");
+    }
+    public void drawSetup(Camera camera, Projection projection){
+        super.drawSetup(camera,projection);
+
+        // Bind NBO
+        glEnableVertexAttribArray(1);
+        glBindBuffer(GL_ARRAY_BUFFER, nbo);
+        glVertexAttribPointer(1,
+                3, GL_FLOAT,
+                false,
+                0, 0);
+
+        uniformsMap.setUniform("lightColor",
+                new Vector3f(1.0f,1.0f,0.0f));
+        uniformsMap.setUniform("lightPos",
+                new Vector3f(1.0f,1.0f,0.0f));
     }
 //    public void draw(){
 //        drawSetup();

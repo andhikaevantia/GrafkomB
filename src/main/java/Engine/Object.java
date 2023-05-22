@@ -46,7 +46,7 @@ public class Object extends ShaderProgram{
                   Vector4f color) {
         super(shaderModuleDataList);
         this.vertices = vertices;
-        setupVAOVBO();
+//        setupVAOVBO();
         this.color = color;
         uniformsMap = new UniformsMap(getProgramId());
         uniformsMap.createUniform(
