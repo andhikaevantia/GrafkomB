@@ -234,8 +234,8 @@ public class Sphere extends Circle{
         glBufferData(GL_ARRAY_BUFFER,
                 Utils.listoFloat(normal),
                 GL_STATIC_DRAW);
-        uniformsMap.createUniform("lightColor");
-        uniformsMap.createUniform("lightPos");
+//        uniformsMap.createUniform("lightColor");
+//        uniformsMap.createUniform("lightPos");
     }
     public void drawSetup(Camera camera, Projection projection){
         super.drawSetup(camera,projection);
@@ -252,6 +252,7 @@ public class Sphere extends Circle{
                 new Vector3f(1.0f,1.0f,0.0f));
         uniformsMap.setUniform("lightPos",
                 new Vector3f(1.0f,1.0f,0.0f));
+        uniformsMap.setUniform("viewPos",camera.getPosition());
     }
 //    public void draw(){
 //        drawSetup();

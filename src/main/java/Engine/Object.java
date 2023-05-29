@@ -49,14 +49,14 @@ public class Object extends ShaderProgram{
 //        setupVAOVBO();
         this.color = color;
         uniformsMap = new UniformsMap(getProgramId());
-        uniformsMap.createUniform(
-                "uni_color");
-        uniformsMap.createUniform(
-                "model");
-        uniformsMap.createUniform(
-                "view");
-        uniformsMap.createUniform(
-                "projection");
+//        uniformsMap.createUniform(
+//                "uni_color");
+//        uniformsMap.createUniform(
+//                "model");
+//        uniformsMap.createUniform(
+//                "view");
+//        uniformsMap.createUniform(
+//                "projection");
         model = new Matrix4f();
         childObject = new ArrayList<>();
     }
